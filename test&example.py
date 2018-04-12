@@ -7,7 +7,7 @@ sth = []
 #basic test
 sec_sth = lock(sth)
 with sec_sth:
-	sec_sth.s.append(1)
+	sec_sth.append(1)
 	
 #threading test
 src1 = []
@@ -22,6 +22,10 @@ class worker1(threading.Thread):
 	def run(self):
 		print('[Worker1] want src1 - %s' % str(datetime.now().timestamp()))
 		with sec_src1:
+			sec_src1.append(1)
+			sec_src1[0] = 2
+			print('Check func:',sec_src1[0])
+			
 			print('[Worker1] use src1 for 5s - %s' % str(datetime.now().timestamp()))
 			time.sleep(5)
 			print('[Worker1] release src1 - %s' % str(datetime.now().timestamp()))

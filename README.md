@@ -96,3 +96,17 @@ with src:
 \__enter__里用event做一层资源占用验证
 
 就这吧，真的难看
+
+----
+
+借鉴了werkzeug的全局变量代理 local模块的黑魔法
+
+成功对资源所有功能进行代理，api变更：
+
+```python
+src = sec_pack(raw_src)
+with src:
+    src.do()
+    src.attr = v
+    src[0] = 1
+```
